@@ -1,6 +1,5 @@
 package com.tokus.diceroller.model
 
-import com.tokus.diceroller.R
 import kotlin.random.Random
 
 object Dice {

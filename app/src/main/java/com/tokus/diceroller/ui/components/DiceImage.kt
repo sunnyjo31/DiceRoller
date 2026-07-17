@@ -19,7 +19,6 @@ import kotlin.math.max
 import kotlin.math.min
 import kotlin.math.sin
 import kotlin.math.sqrt
-import kotlin.random.Random
 
 @Composable
 fun DiceImage(

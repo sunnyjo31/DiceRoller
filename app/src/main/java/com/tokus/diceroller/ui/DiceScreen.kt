@@ -19,6 +19,8 @@ import kotlinx.coroutines.launch
 import android.media.MediaPlayer
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.hapticfeedback.HapticFeedbackType
+import androidx.compose.ui.platform.LocalHapticFeedback
 import com.tokus.diceroller.R
 import android.view.ViewGroup
 import androidx.compose.ui.viewinterop.AndroidView
@@ -48,6 +50,7 @@ fun DiceScreen(modifier: Modifier = Modifier) {
     val scope = rememberCoroutineScope()
 
     val context = LocalContext.current
+    val hapticFeedback = LocalHapticFeedback.current
     val diceSize = 160
 
     Column(
@@ -129,6 +132,7 @@ fun DiceScreen(modifier: Modifier = Modifier) {
             Button(
                 enabled = !rolling,
                 onClick = {
+                    hapticFeedback.performHapticFeedback(HapticFeedbackType.LongPress)
 
                     scope.launch {
 
@@ -147,7 +151,7 @@ fun DiceScreen(modifier: Modifier = Modifier) {
                             diceNumber = Dice.roll()
 
                             if (diceMode == DiceMode.TWO_DICE) {
-                                secondDiceNumber = Dice.roll()
+                                secondDiceNumber = Dice.rollSecondDie(diceNumber)
                             }
 
                             delay(delayTime)
@@ -158,7 +162,7 @@ fun DiceScreen(modifier: Modifier = Modifier) {
                         diceNumber = Dice.roll()
 
                         if (diceMode == DiceMode.TWO_DICE) {
-                            secondDiceNumber = Dice.roll()
+                            secondDiceNumber = Dice.rollSecondDie(diceNumber)
                         }
 
                         rolling = false

@@ -104,14 +104,15 @@ private class Dice3DView(context: Context) : View(context) {
         val startY = rotationY
         val startZ = rotationZ
         animator = ValueAnimator.ofFloat(0f, 1f).apply {
-            duration = 680L
+            duration = 2_200L
             repeatCount = ValueAnimator.INFINITE
             interpolator = LinearInterpolator()
             addUpdateListener { animation ->
                 val progress = animation.animatedValue as Float
-                rotationX = startX + progress * 720f
-                rotationY = startY + progress * 900f
-                rotationZ = startZ + progress * 540f
+                // Every axis completes a whole number of turns so repeat mode is seamless.
+                rotationX = startX + progress * 360f
+                rotationY = startY + progress * 720f
+                rotationZ = startZ + progress * 360f
                 invalidate()
             }
             start()

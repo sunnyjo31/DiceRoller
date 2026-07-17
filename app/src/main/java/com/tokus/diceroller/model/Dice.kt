@@ -5,20 +5,19 @@ import kotlin.random.Random
 
 object Dice {
 
-    fun getImage(value: Int): Int {
 
-        return when (value) {
-            1 -> R.drawable.dice_1
-            2 -> R.drawable.dice_2
-            3 -> R.drawable.dice_3
-            4 -> R.drawable.dice_4
-            5 -> R.drawable.dice_5
-            else -> R.drawable.dice_6
-        }
-
-    }
 
     fun roll(): Int {
         return Random.nextInt(1, 7)
+    }
+
+    /**
+     * Keeps doubles possible but uncommon: a second die matches the first 10% of the time.
+     */
+    fun rollSecondDie(firstDie: Int): Int {
+        if (Random.nextInt(10) == 0) return firstDie
+
+        val roll = Random.nextInt(1, 6)
+        return if (roll >= firstDie) roll + 1 else roll
     }
 }
